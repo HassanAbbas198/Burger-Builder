@@ -1,10 +1,12 @@
 import React from 'react';
 
+import classes from './Layout.module.css';
+
 const Layout = (props) => {
 	return (
 		<React.Fragment>
 			<div>Toolbar, SideDrawer, Backdrop</div>
-			<main>{props.children}</main>
+			<main className={classes.Content}>{props.children}</main>
 		</React.Fragment>
 	);
 };
