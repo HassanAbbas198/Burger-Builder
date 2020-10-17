@@ -81,23 +81,8 @@ class BurgerBuilder extends Component {
 		this.setState({ purchasing: false });
 	};
 
-	purchaseContinueHandler = async () => {
-		// passing the ingredients as query params
-		const queryParams = [];
-		for (let i in this.state.ingredients) {
-			queryParams.push(
-				`${encodeURIComponent(i)}=${encodeURIComponent(
-					this.state.ingredients[i]
-				)}`
-			);
-		}
-		queryParams.push(`price=${this.state.totalPrice}`);
-		const queryString = queryParams.join('&');
-
-		this.props.history.push({
-			pathname: 'checkout',
-			search: '?' + queryString,
-		});
+	purchaseContinueHandler = () => {
+		alert('done');
 	};
 
 	render() {
@@ -115,7 +100,12 @@ class BurgerBuilder extends Component {
 					show={this.state.purchasing}
 					modalClosed={this.purchaseCancelHandler}
 				>
-					<OrderSummary ingredients={this.state.ingredients} />
+					<OrderSummary
+						ingredients={this.state.ingredients}
+						purchaseCanceled={this.purchaseCancelHandler}
+						purchaseContinued={this.purchaseContinueHandler}
+						price={this.state.totalPrice}
+					/>
 				</Modal>
 				<Burger ingredients={this.state.ingredients} />
 				<BuildControls

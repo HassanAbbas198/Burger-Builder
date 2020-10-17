@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// import Button from '../../../components/UI/Button/Button';
+import Button from '../../../components/UI/Button/Button';
 
 class OrderSummary extends Component {
 	render() {
@@ -20,15 +20,15 @@ class OrderSummary extends Component {
 				<p>A delicious burger with the following ingredients: </p>
 				<ul>{ingredientSummary}</ul>
 				<p>
-					{/* <strong>Total price: ${this.props.price.toFixed(2)}</strong> */}
+					<strong>Total price: ${this.props.price.toFixed(2)}</strong>
 				</p>
 				<p>Continue to checkout?</p>
-				{/* <Button btnType="Danger" clicked={this.props.purchaseCanceled}>
+				<Button btnType="Danger" clicked={this.props.purchaseCanceled}>
 					CANCEL
 				</Button>
 				<Button btnType="Success" clicked={this.props.purchaseContinued}>
 					CONTINUE
-				</Button> */}
+				</Button>
 			</React.Fragment>
 		);
 	}
