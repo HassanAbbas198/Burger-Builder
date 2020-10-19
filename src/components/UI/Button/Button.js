@@ -2,7 +2,7 @@ import React from 'react';
 
 import classes from './Button.module.css';
 
-const button = (props) => {
+const Button = (props) => {
 	return (
 		<button
 			disabled={props.disabled}
@@ -14,4 +14,4 @@ const button = (props) => {
 	);
 };
 
-export default button;
+export default Button;
