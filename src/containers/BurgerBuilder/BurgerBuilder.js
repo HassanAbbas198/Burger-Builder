@@ -103,6 +103,7 @@ class BurgerBuilder extends Component {
 				)}`
 			);
 		}
+		queryParams.push(`price=${this.state.totalPrice}`);
 
 		const queryString = queryParams.join('&');
 
@@ -110,29 +111,6 @@ class BurgerBuilder extends Component {
 			pathname: '/checkout',
 			search: `?${queryString}`,
 		});
-
-		// this.setState({ loading: true });
-
-		// const order = {
-		// 	ingredients: this.state.ingredients,
-		// 	price: this.state.totalPrice,
-		// 	customer: {
-		// 		name: 'hassan abbas',
-		// 		address: {
-		// 			street: 'habla',
-		// 			country: 'Lebanon',
-		// 		},
-		// 		email: 'test@test.com',
-		// 	},
-		// 	deliveryMethod: 'fastest',
-		// };
-
-		// try {
-		// 	await axios.post('/orders.json', order);
-		// 	this.setState({ loading: false, purchasing: false });
-		// } catch (error) {
-		// 	this.setState({ loading: false, purchasing: false });
-		// }
 	};
 
 	render() {
