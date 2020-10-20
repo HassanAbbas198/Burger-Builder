@@ -28,9 +28,7 @@ class BurgerBuilder extends Component {
 
 	async componentDidMount() {
 		try {
-			const res = await axios.get(
-				'https://burger-builder-9e60b.firebaseio.com/ingredients.json'
-			);
+			const res = await axios.get('/ingredients.json');
 			this.setState({ ingredients: res.data });
 		} catch (error) {
 			this.setState({ error: true });
@@ -107,7 +105,7 @@ class BurgerBuilder extends Component {
 
 		const queryString = queryParams.join('&');
 
-		this.props.push({
+		this.props.history.push({
 			pathname: '/checkout',
 			search: `?${queryString}`,
 		});

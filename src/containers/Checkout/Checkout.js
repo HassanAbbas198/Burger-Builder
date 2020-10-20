@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
-import ContactData from '../../components/Order/CheckoutSummary/ContactData/ContactData';
+import ContactData from './ContactData/ContactData';
 
 class Checkout extends Component {
 	state = {
@@ -10,7 +10,7 @@ class Checkout extends Component {
 		price: 0,
 	};
 
-	componentDidMount() {
+	componentWillMount() {
 		const query = new URLSearchParams(this.props.location.search);
 		const ingredients = {};
 		let price = 0;
