@@ -17,6 +17,11 @@ class ContactData extends Component {
 					placeholder: 'Your Name ',
 				},
 				value: '',
+				validation: {
+					required: true,
+				},
+				valid: false,
+				touched: false,
 			},
 
 			street: {
@@ -26,6 +31,11 @@ class ContactData extends Component {
 					placeholder: 'Your Street ',
 				},
 				value: '',
+				validation: {
+					required: true,
+				},
+				valid: false,
+				touched: false,
 			},
 			zipCode: {
 				elementType: 'input',
@@ -34,6 +44,11 @@ class ContactData extends Component {
 					placeholder: 'ZIP Code ',
 				},
 				value: '',
+				validation: {
+					required: true,
+				},
+				valid: false,
+				touched: false,
 			},
 			country: {
 				elementType: 'input',
@@ -42,6 +57,11 @@ class ContactData extends Component {
 					placeholder: 'Your Country ',
 				},
 				value: '',
+				validation: {
+					required: true,
+				},
+				valid: false,
+				touched: false,
 			},
 
 			email: {
@@ -51,6 +71,11 @@ class ContactData extends Component {
 					placeholder: 'Your E-mail',
 				},
 				value: '',
+				validation: {
+					required: true,
+				},
+				valid: false,
+				touched: false,
 			},
 
 			deliveryMethod: {
@@ -62,8 +87,11 @@ class ContactData extends Component {
 					],
 				},
 				value: 'fastest',
+				validation: {},
+				valid: true,
 			},
 		},
+		formIsValid: false,
 		loading: false,
 	};
 
@@ -71,6 +99,7 @@ class ContactData extends Component {
 		event.preventDefault();
 		this.setState({ loading: true });
 
+		// getting the form data from the state
 		const formData = {};
 		for (let FormElementId in this.state.orderForm) {
 			formData[FormElementId] = this.state.orderForm[FormElementId].value;
@@ -86,6 +115,16 @@ class ContactData extends Component {
 		this.props.history.push('/');
 	};
 
+	checkValidity = (value, rules) => {
+		let isValid = true;
+
+		if (rules.required) {
+			isValid = value.trim() !== '' && isValid;
+		}
+
+		return isValid;
+	};
+
 	inputChnagedHandler = (event, inputId) => {
 		// this doesn't create a deep clone
 		const updatedOrderForm = { ...this.state.orderForm };
@@ -97,9 +136,26 @@ class ContactData extends Component {
 
 		updatedFormElement.value = event.target.value;
 
-		this.setState({ orderForm: updatedOrderForm });
+		// check validity
+		updatedFormElement.valid = this.checkValidity(
+			updatedFormElement.value,
+			updatedFormElement.validation
+		);
+
+		updatedFormElement.touched = true;
+
+		updatedOrderForm[inputId] = updatedFormElement;
+
+		// form validity
+		let formIsValid = true;
+		for (let inputId in updatedOrderForm) {
+			formIsValid = updatedOrderForm[inputId].valid && formIsValid;
+		}
+
+		this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
 	};
 	render() {
+		// rendering the form element dynamically
 		const formElementArray = [];
 		for (let key in this.state.orderForm) {
 			formElementArray.push({
@@ -116,13 +172,20 @@ class ContactData extends Component {
 							elementType={formElement.config.elementType}
 							elementConfig={formElement.config.elementConfig}
 							value={formElement.config.value}
+							invalid={!formElement.config.valid}
+							shouldValidate={formElement.config.validation}
+							touched={formElement.config.touched}
 							changed={(event) =>
 								this.inputChnagedHandler(event, formElement.id)
 							}
 						/>
 					);
 				})}
-				<Button btnType="Success" clicked={this.orderHandler}>
+				<Button
+					btnType="Success"
+					clicked={this.orderHandler}
+					disabled={!this.state.formIsValid}
+				>
 					ORDER
 				</Button>
 			</form>
