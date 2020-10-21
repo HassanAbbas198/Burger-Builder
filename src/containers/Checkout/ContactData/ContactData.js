@@ -152,10 +152,9 @@ class ContactData extends Component {
 			formIsValid = updatedOrderForm[inputId].valid && formIsValid;
 		}
 
-		this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
+		this.setState({ orderForm: updatedOrderForm, formIsValid });
 	};
 	render() {
-		// rendering the form element dynamically
 		const formElementArray = [];
 		for (let key in this.state.orderForm) {
 			formElementArray.push({
@@ -181,11 +180,7 @@ class ContactData extends Component {
 						/>
 					);
 				})}
-				<Button
-					btnType="Success"
-					clicked={this.orderHandler}
-					disabled={!this.state.formIsValid}
-				>
+				<Button btnType="Success" disabled={!this.state.formIsValid}>
 					ORDER
 				</Button>
 			</form>
