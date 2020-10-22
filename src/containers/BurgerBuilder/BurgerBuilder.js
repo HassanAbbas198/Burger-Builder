@@ -14,17 +14,10 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 class BurgerBuilder extends Component {
 	state = {
 		purchasing: false,
-		loading: false,
-		error: false,
 	};
 
-	async componentDidMount() {
-		// try {
-		// 	const res = await axios.get('/ingredients.json');
-		// 	this.setState({ ingredients: res.data });
-		// } catch (error) {
-		// 	this.setState({ error: true });
-		// }
+	componentDidMount() {
+		this.props.onInitIngredients();
 	}
 
 	updatePurchaseState() {
@@ -63,7 +56,7 @@ class BurgerBuilder extends Component {
 		}
 
 		let orderSummary = null;
-		let burger = this.state.error ? (
+		let burger = this.props.error ? (
 			<p style={{ textAlign: 'center' }}>Ingredients can't be loaded</p>
 		) : (
 			<Spinner />
@@ -94,10 +87,6 @@ class BurgerBuilder extends Component {
 			);
 		}
 
-		if (this.state.loading) {
-			orderSummary = <Spinner />;
-		}
-
 		return (
 			<React.Fragment>
 				<Modal
@@ -116,6 +105,7 @@ const mapStateToProps = (state) => {
 	return {
 		ings: state.ingredients,
 		price: state.totalPrice,
+		error: state.error,
 	};
 };
 
@@ -124,6 +114,7 @@ const mapDispatchToProps = (dispatch) => {
 		onIngredientAdded: (ingName) => dispatch(actions.addIngredient(ingName)),
 		onIngredientRemoved: (ingName) =>
 			dispatch(actions.removeIngredient(ingName)),
+		onInitIngredients: () => dispatch(actions.initIngredients()),
 	};
 };
 
