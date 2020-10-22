@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import axios from '../../axios-orders';
-import * as actionTypes from '../../store/actions';
+import * as actionTypes from '../../store/actions/actionTypes';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
