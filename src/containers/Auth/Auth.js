@@ -137,8 +137,15 @@ class Auth extends Component {
 			form = <Spinner />;
 		}
 
+		let errorMessage = null;
+
+		if (this.props.error) {
+			errorMessage = <p style={{ color: 'red' }}>{this.props.error}</p>;
+		}
+
 		return (
 			<div className={classes.Auth}>
+				{errorMessage}
 				<form onSubmit={this.submitHandler}>
 					{form}
 					<Button btnType="Success" clicked={this.authHandler}>
@@ -153,6 +160,13 @@ class Auth extends Component {
 	}
 }
 
+const mapStateToProps = (state) => {
+	return {
+		loading: state.auth.loading,
+		error: state.auth.error,
+	};
+};
+
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onAuth: (email, password, isSignup) =>
@@ -160,4 +174,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

@@ -25,12 +25,31 @@ const reducer = (state = initialState, action) => {
 			};
 
 		case actionTypes.AUTH_FAIL:
+			let error = null;
+			if (action.error.message === 'EMAIL_EXISTS') {
+				error = 'Email already exists';
+			}
+
+			if (action.error.message === 'EMAIL_NOT_FOUND') {
+				error = 'Email not found';
+			}
+
+			if (action.error.message === 'INVALID_PASSWORD') {
+				error = 'Invalid password';
+			}
+
 			return {
 				...state,
 				loading: false,
-				error: action.error,
+				error,
 			};
 
+		case actionTypes.AUTH_LOGOUT:
+			return {
+				...state,
+				token: null,
+				userId: null,
+			};
 		default:
 			return state;
 	}
