@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import classes from './Auth.module.css';
@@ -76,6 +77,12 @@ class Auth extends Component {
 		return isValid;
 	}
 
+	componentDidMount() {
+		if (!this.props.building && this.props.authRedirectPath !== '/') {
+			this.props.onSetAuthRedirectPath();
+		}
+	}
+
 	inputChnagedHandler = (event, inputId) => {
 		const updatedControls = {
 			...this.state.controls,
@@ -143,8 +150,14 @@ class Auth extends Component {
 			errorMessage = <p style={{ color: 'red' }}>{this.props.error}</p>;
 		}
 
+		let authRedirect = null;
+		if (this.props.isAuth) {
+			authRedirect = <Redirect to={this.props.authRedirectPath} />;
+		}
+
 		return (
 			<div className={classes.Auth}>
+				{authRedirect}
 				{errorMessage}
 				<form onSubmit={this.submitHandler}>
 					{form}
@@ -164,6 +177,9 @@ const mapStateToProps = (state) => {
 	return {
 		loading: state.auth.loading,
 		error: state.auth.error,
+		isAuth: state.auth.token !== null,
+		building: state.burgerBuilder.building,
+		authRedirectPath: state.auth.authRedirectPath,
 	};
 };
 
@@ -171,6 +187,8 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onAuth: (email, password, isSignup) =>
 			dispatch(actions.auth(email, password, isSignup)),
+
+		onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/')),
 	};
 };
 
