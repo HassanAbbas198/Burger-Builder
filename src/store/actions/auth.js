@@ -46,11 +46,11 @@ export const auth = (email, password, isSignup) => {
 		returnSecureToken: true,
 	};
 
-	let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDKzJJbNnjP-AQ0Ca4x-ofOC_X6uSne9F8`;
+	let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC84hKPt1rTo479IA75cif-TqoeDzwl64s`;
 
 	if (!isSignup) {
 		url =
-			'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDKzJJbNnjP-AQ0Ca4x-ofOC_X6uSne9F8';
+			'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC84hKPt1rTo479IA75cif-TqoeDzwl64s';
 	}
 
 	return async (dispatch) => {
