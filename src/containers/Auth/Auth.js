@@ -43,14 +43,13 @@ const Auth = (props) => {
 			touched: false,
 		},
 	});
-
-	const [isSignup, setIsSignup] = useState(true);
+	const [isSignup, setIsSignup] = useState(false);
 
 	const { building, authRedirectPath, onSetAuthRedirectPath } = props;
 
 	useEffect(() => {
 		if (!building && authRedirectPath !== '/') {
-			onSetAuthRedirectPath();
+			onSetAuthRedirectPath('/');
 		}
 	}, [building, authRedirectPath, onSetAuthRedirectPath]);
 
@@ -103,7 +102,6 @@ const Auth = (props) => {
 	}
 
 	let errorMessage = null;
-
 	if (props.error) {
 		errorMessage = <p style={{ color: 'red' }}>{props.error}</p>;
 	}
@@ -119,10 +117,10 @@ const Auth = (props) => {
 			{errorMessage}
 			<form onSubmit={submitHandler}>
 				{form}
-				<Button btnType="Success">{isSignup ? 'SIGN UP' : 'SIGN IN'}</Button>
+				<Button btnType="Success">{!isSignup ? 'SIGN IN' : 'SIGN UP'}</Button>
 			</form>
 			<Button btnType="Danger" clicked={switchAuthModeHandler}>
-				SWITCH TO {isSignup ? 'SIGN IN' : 'SIGN UP'}
+				SWITCH TO {!isSignup ? 'SIGN UP' : 'SIGN IN'}
 			</Button>
 		</div>
 	);
@@ -143,7 +141,8 @@ const mapDispatchToProps = (dispatch) => {
 		onAuth: (email, password, isSignup) =>
 			dispatch(actions.auth(email, password, isSignup)),
 
-		onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/')),
+		onSetAuthRedirectPath: (path) =>
+			dispatch(actions.setAuthRedirectPath(path)),
 	};
 };
 
