@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './CheckoutSummary.module.css';
 
@@ -20,6 +21,12 @@ const CheckoutSummary = (props) => {
 			</Button>
 		</div>
 	);
+};
+
+CheckoutSummary.prototype = {
+	ingredients: PropTypes.object.isRequired,
+	checkoutCanceled: PropTypes.func.isRequired,
+	checkoutContinued: PropTypes.func.isRequired,
 };
 
 export default CheckoutSummary;

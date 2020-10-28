@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './DrawerToggle.module.css';
 
@@ -10,6 +11,10 @@ const DrawerToggle = (props) => {
 			<div></div>
 		</div>
 	);
+};
+
+DrawerToggle.prototype = {
+	clicked: PropTypes.func.isRequired,
 };
 
 export default DrawerToggle;

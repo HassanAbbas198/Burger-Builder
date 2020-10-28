@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './SideDrawer.module.css';
 
@@ -23,6 +24,12 @@ const SideDrawer = (props) => {
 			</div>
 		</React.Fragment>
 	);
+};
+
+SideDrawer.prototype = {
+	isAuth: PropTypes.bool.isRequired,
+	show: PropTypes.bool.isRequired,
+	closed: PropTypes.func.isRequired,
 };
 
 export default SideDrawer;

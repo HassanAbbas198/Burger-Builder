@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import classes from './Auth.module.css';
 
@@ -124,6 +125,16 @@ const Auth = (props) => {
 			</Button>
 		</div>
 	);
+};
+
+Auth.prototype = {
+	loading: PropTypes.bool.isRequired,
+	error: PropTypes.string,
+	isAuth: PropTypes.bool.isRequired,
+	building: PropTypes.bool.isRequired,
+	authRedirectPath: PropTypes.string.isRequired,
+	onAuth: PropTypes.func.isRequired,
+	onSetAuthRedirectPath: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
@@ -30,6 +31,14 @@ const Orders = (props) => {
 		});
 	}
 	return <div>{orders}</div>;
+};
+
+Orders.prototype = {
+	orders: PropTypes.array.isRequired,
+	loading: PropTypes.bool.isRequired,
+	token: PropTypes.string.isRequired,
+	userId: PropTypes.string.isRequired,
+	onFetchOrders: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

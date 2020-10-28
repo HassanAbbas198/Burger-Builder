@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import axios from '../../../axios-orders';
 
 import classes from './ContactData.module.css';
@@ -186,6 +188,15 @@ const ContactData = (props) => {
 			{form}
 		</div>
 	);
+};
+
+ContactData.prototype = {
+	ings: PropTypes.object.isRequired,
+	price: PropTypes.number.isRequired,
+	loading: PropTypes.bool.isRequired,
+	token: PropTypes.string.isRequired,
+	userId: PropTypes.string.isRequired,
+	onOrderBurger: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './Toolbar.module.css';
 
@@ -15,5 +16,10 @@ const Toolbar = (props) => (
 		</nav>
 	</header>
 );
+
+Toolbar.prototype = {
+	isAuth: PropTypes.bool.isRequired,
+	toggleClicked: PropTypes.func.isRequired,
+};
 
 export default Toolbar;

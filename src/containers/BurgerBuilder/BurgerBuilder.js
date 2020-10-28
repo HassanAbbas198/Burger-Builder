@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
@@ -101,6 +102,18 @@ export const BurgerBuilder = (props) => {
 			{burger}
 		</React.Fragment>
 	);
+};
+
+BurgerBuilder.prototype = {
+	ings: PropTypes.object.isRequired,
+	price: PropTypes.number.isRequired,
+	isAuth: PropTypes.bool.isRequired,
+	error: PropTypes.string.isRequired,
+	onInitIngredients: PropTypes.func.isRequired,
+	onIngredientAdded: PropTypes.func.isRequired,
+	onIngredientRemoved: PropTypes.func.isRequired,
+	onInitPurchase: PropTypes.func.isRequired,
+	onSetAuthRedirectPath: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

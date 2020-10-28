@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from './ContactData/ContactData';
@@ -34,6 +35,11 @@ const Checkout = (props) => {
 		);
 	}
 	return summary;
+};
+
+Checkout.prototype = {
+	ings: PropTypes.object.isRequired,
+	purchased: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => {

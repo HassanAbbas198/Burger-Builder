@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './Input.module.css';
 
@@ -76,6 +77,16 @@ const Input = (props) => {
 			{validationError}
 		</div>
 	);
+};
+
+Input.prototype = {
+	elementType: PropTypes.string.isRequired,
+	elementConfig: PropTypes.object.isRequired,
+	shouldValidate: PropTypes.object.isRequired,
+	invalid: PropTypes.bool.isRequired,
+	touched: PropTypes.bool.isRequired,
+	changed: PropTypes.func.isRequired,
+	value: PropTypes.string.isRequired,
 };
 
 export default Input;
