@@ -13,6 +13,7 @@ export default (axios) => {
 		(err) => {
 			const fallbackValue = [{ title: err, completed: false }];
 			setError(fallbackValue[0].title);
+			return Promise.reject(fallbackValue);
 		}
 	);
 
